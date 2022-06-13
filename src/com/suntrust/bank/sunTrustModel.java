@@ -40,7 +40,7 @@ public class sunTrustModel {
     private final static String DELETE_CUSTOMER = "DELETE FROM fk_customers WHERE id = ?";
     private final static String UPDATE_CUSTOMER = "UPDATE fk_customers SET firstname=?, lastname=?, email=?, address=?" +
             "occupation=?, marital_status=?, phone_number=? WHERE id=?";
-    private final static String READ_ALL_CUSTOMER = "SELECT firstname, lastname, email, address, occupation, marital_status," +
+    private final static String READ_ALL_CUSTOMER = "SELECT id, firstname, lastname, email, address, occupation, marital_status," +
             "phone_number, balance FROM fk_customers";
     private final static String LOGIN = "SELECT id, firstname, lastname, email, address, occupation, marital_status, phone_number, " +
             "balance FROM fk_customers WHERE email=? AND password=?";
@@ -128,23 +128,42 @@ public class sunTrustModel {
 
         int rs = preparedstatement.executeUpdate();
         return rs;
-
     }
 
-    public void transfer() {
+    public int deleteCustomer() throws SQLException {
 
+        Connection connection = connectDB();
+        PreparedStatement preparedstatement = connection.prepareStatement(DELETE_CUSTOMER);
+
+        preparedstatement.setString(1, "id");
+
+        int rs = preparedstatement.executeUpdate();
+        return rs;
     }
 
-    public void deleteCustomer() {
+    public int updateCustomer() throws SQLException {
 
-    }
+        Connection connection = connectDB();
+        PreparedStatement preparedstatement = connection.prepareStatement(UPDATE_CUSTOMER);
 
-    public void updateCustomer() {
+        preparedstatement.setString(1, "firstname");
+        preparedstatement.setString(2, "lastname");
+        preparedstatement.setString(3, "email");
+        preparedstatement.setString(4, "address");
+        preparedstatement.setString(5, "occupation");
+        preparedstatement.setString(6, "marital_status");
+        preparedstatement.setString(7, "phone_number");
 
+        int rs = preparedstatement.executeUpdate();
+        return rs;
     }
 
     public void readAllCustomer() {
 
+    }
+
+    // beta feature
+    public void transfer() {
 
     }
 
