@@ -1,9 +1,7 @@
 package com.suntrust.bank;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.math.BigDecimal;
+import java.sql.*;
 
 public class sunTrustModel {
 
@@ -12,7 +10,7 @@ public class sunTrustModel {
     }
 
     // database fields
-    long id;
+    String id;
     String firstname;
     String lastname;
     String email;
@@ -22,6 +20,7 @@ public class sunTrustModel {
     String marital_status;
     String phone_number;
     String balance;
+    long extraBalance;
 
     // Beta features
     String meansOfIdentification;
@@ -42,8 +41,8 @@ public class sunTrustModel {
             "occupation=?, marital_status=?, phone_number=? WHERE id=?";
     private final static String READ_ALL_CUSTOMER = "SELECT firstname, lastname, email, address, occupation, marital_status," +
             "phone_number, balance FROM fk_customers";
-    private final static String LOGIN = "SELECT firstname, lastname, email, address, occupation, marital_status, phone_number, " +
-            "balance FROM fk_customer WHERE email=? AND password=?";
+    private final static String LOGIN = "SELECT id, firstname, lastname, email, address, occupation, marital_status, phone_number, " +
+            "balance FROM fk_customers WHERE email=? AND password=?";
     private final static String DEPOSIT = "UPDATE fk_customers SET balance=? WHERE id=?";
     private final static String WITHDRAW = "UPDATE fk_customers SET balance=? WHERE id=?";
 
@@ -78,15 +77,56 @@ public class sunTrustModel {
         return rs;
     }
 
-    public  void customerLogin() {
+    public boolean customerLogin() throws SQLException {
 
+        boolean returnValue = false;
+        Connection connection = connectDB();
+        PreparedStatement preparestatement = connection.prepareStatement(LOGIN);
+
+        preparestatement.setString(1, email);
+        preparestatement.setString(2, password);
+
+        ResultSet rs = preparestatement.executeQuery();
+
+            while (rs.next()) {
+
+                id = rs.getString("id");
+                firstname = rs.getString( "firstname");
+                lastname = rs.getString("lastname");
+                address = rs.getString("address");
+                occupation = rs.getString("occupation");
+                marital_status = rs.getString("marital_status");
+                phone_number = rs.getString("phone_number");
+                balance = rs.getString("balance");
+
+                returnValue = true;
+            }
+
+            return returnValue;
     }
 
-    public void deposit() {
+    public int deposit() throws SQLException {
 
+        Connection connection = connectDB();
+        PreparedStatement preparedstatement = connection.prepareStatement(DEPOSIT);
+
+        preparedstatement.setString(1, balance);
+        preparedstatement.setString(2, id);
+
+        int rs = preparedstatement.executeUpdate();
+        return rs;
     }
 
-    public void withdraw() {
+    public int withdraw() throws  SQLException {
+
+        Connection connection = connectDB();
+        PreparedStatement preparedstatement = connection.prepareStatement(WITHDRAW);
+
+        preparedstatement.setString(1, balance);
+        preparedstatement.setString(2, id);
+
+        int rs = preparedstatement.executeUpdate();
+        return rs;
 
     }
 

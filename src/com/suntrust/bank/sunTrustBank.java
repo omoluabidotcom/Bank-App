@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public class sunTrustBank {
 
+    // class constructor
     public sunTrustBank() {
 
     }
 
-    // boolean to the control the do while loop
+    // control for do while loop
     boolean start = true;
 
     // suntrustmodel object
@@ -23,6 +24,56 @@ public class sunTrustBank {
     }
 
     class customerLogin{
+
+        // class constructor
+        public  customerLogin() {
+
+        }
+
+        Scanner scan = new Scanner(System.in);
+
+        public  void getDetails() {
+
+            System.out.println("Enter your Email");
+            sunActive.email = scan.nextLine();
+
+            System.out.println("Enetr your Password");
+            sunActive.password = scan.nextLine();
+        }
+
+        public boolean loginCustomer() throws SQLException {
+
+            boolean returnValue = false;
+            if(sunActive.customerLogin()) {
+
+                System.out.println("Welcome to your dashboard Mr "+sunActive.firstname+" "+sunActive.lastname);
+                System.out.println("Address: "+sunActive.address);
+                System.out.println("Occupation: "+sunActive.occupation);
+                System.out.println("Phone Number: " + sunActive.phone_number);
+                System.out.println("Balance: " + sunActive.balance);
+                // System.out.println(sunActive.id);
+                returnValue = true;
+            }
+            return returnValue;
+
+        }
+
+        public void getDeposit() {
+
+            System.out.println("Enter amount to be deposit");
+            sunActive.extraBalance = scan.nextLong();
+        }
+
+        public void confirmDeposit() throws SQLException {
+
+            if(sunActive.deposit() >= 1) {
+
+                System.out.println("Money deposited to your Account \n Your Balance is " + sunActive.balance);
+            } else {
+
+                System.out.println("Unable to perform deposit at the moment, please try again later");
+            }
+        }
 
     }
 
@@ -87,14 +138,53 @@ public class sunTrustBank {
             int firstOption = scan.nextInt();
 
             switch(firstOption) {
+
                 case 1:
                     System.out.println("Customer Care Login");
                     start = false;
                     break;
+
                 case 2:
-                    System.out.println("Customer Login");
-                    start = false;
+                    customerLogin customerLoginObj = new customerLogin();
+                    customerLoginObj.getDetails();
+                    if (!customerLoginObj.loginCustomer()) {
+
+                        System.out.println("Wrong Email or Password entered \nTry Again");
+                        System.exit(0);
+                    }
+                    System.out.println("\n");
+
+                    System.out.println("What action would you like to perform");
+                    System.out.println("Press \n 1 Deposit \n 2 Withdraw \n 3 Back \n 4 Exit");
+
+                    int secondOption = scan.nextInt();
+
+                    switch (secondOption) {
+                        case 1:
+                            customerLoginObj.getDeposit();
+                            sunActive.extraBalance = sunActive.extraBalance + Long.valueOf(sunActive.balance);
+                            sunActive.balance = String.valueOf(sunActive.extraBalance);
+                            customerLoginObj.confirmDeposit();
+                            break;
+
+                        case 2:
+                            System.out.println();
+                            break;
+
+                        case 3:
+                            break;
+
+                        case 4:
+                            System.out.println("Thank you for Banking with us.");
+                            start = false;
+                            break;
+
+                        default:
+                            System.out.println("Wrong option Login again");
+                            break;
+                    }
                     break;
+
                 case 3:
                     customerReg customerRegObj = new customerReg();
                     customerRegObj.getDetails();
@@ -104,12 +194,14 @@ public class sunTrustBank {
                         System.exit(0);
                     }
                     break;
+
                 case 4:
                     System.out.println("Thank you for banking with us");
                     start = false;
                     break;
+
                 default:
-                    System.out.println("Wrong option");
+                    System.out.println("Wrong option try again");
                     start = false;
                     break;
             }
