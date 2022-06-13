@@ -21,6 +21,7 @@ public class sunTrustModel {
     String phone_number;
     String balance;
     long extraBalance;
+    long withdrawalFund;
 
     // Beta features
     String meansOfIdentification;

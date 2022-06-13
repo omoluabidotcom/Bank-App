@@ -75,6 +75,23 @@ public class sunTrustBank {
             }
         }
 
+        public void getWithdrawal() {
+
+            System.out.println("Enter amount you want to withdraw");
+            sunActive.extraBalance = scan.nextLong();
+        }
+
+        public void confirmWithdraw() throws SQLException {
+
+            if(sunActive.withdraw() >= 1) {
+
+                System.out.println("Withdrawal successful");
+            } else {
+
+                System.out.println("Unable to perform withdrawal at the moment, please try again later");
+            }
+        }
+
     }
 
     // customer registration class
@@ -131,7 +148,7 @@ public class sunTrustBank {
     public void runApp() throws SQLException {
 
         do {
-            System.out.println("Welcome to Sun Trust Bank");
+            System.out.println("\nWelcome to Sun Trust Bank");
             System.out.println("What action would you like to perform");
             System.out.println("Press \n 1 Customer Care Login \n 2 Customer Login \n 3 Open an Account \n 4 Exit");
 
@@ -168,7 +185,17 @@ public class sunTrustBank {
                             break;
 
                         case 2:
-                            System.out.println();
+                            customerLoginObj.getWithdrawal();
+                            if (sunActive.extraBalance > Long.valueOf(sunActive.balance)) {
+
+                                System.out.println("Insufficient balanace");
+                            } else {
+
+                                sunActive.withdrawalFund = Long.valueOf(sunActive.balance);
+                                sunActive.withdrawalFund = sunActive.withdrawalFund - sunActive.extraBalance;
+                                sunActive.balance = String.valueOf(sunActive.withdrawalFund);
+                                customerLoginObj.confirmWithdraw();
+                            }
                             break;
 
                         case 3:
