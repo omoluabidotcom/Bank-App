@@ -135,7 +135,7 @@ public class sunTrustModel {
         Connection connection = connectDB();
         PreparedStatement preparedstatement = connection.prepareStatement(DELETE_CUSTOMER);
 
-        preparedstatement.setString(1, "id");
+        preparedstatement.setString(1, id);
 
         int rs = preparedstatement.executeUpdate();
         return rs;
@@ -146,13 +146,13 @@ public class sunTrustModel {
         Connection connection = connectDB();
         PreparedStatement preparedstatement = connection.prepareStatement(UPDATE_CUSTOMER);
 
-        preparedstatement.setString(1, "firstname");
-        preparedstatement.setString(2, "lastname");
-        preparedstatement.setString(3, "email");
-        preparedstatement.setString(4, "address");
-        preparedstatement.setString(5, "occupation");
-        preparedstatement.setString(6, "marital_status");
-        preparedstatement.setString(7, "phone_number");
+        preparedstatement.setString(1, firstname);
+        preparedstatement.setString(2, lastname);
+        preparedstatement.setString(3, email);
+        preparedstatement.setString(4, address);
+        preparedstatement.setString(5, occupation);
+        preparedstatement.setString(6, marital_status);
+        preparedstatement.setString(7, phone_number);
 
         int rs = preparedstatement.executeUpdate();
         return rs;

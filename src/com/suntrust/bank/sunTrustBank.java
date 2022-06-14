@@ -20,13 +20,45 @@ public class sunTrustBank {
     Scanner scan = new Scanner(System.in);
 
     class customerCare{
-        
+
+        // class constructor
+        public customerCare() {
+
+        }
+
+        public  void confirmDelete() throws SQLException {
+
+            if (sunActive.deleteCustomer()>=1) {
+
+                System.out.println("Customer delete success");
+            } else {
+
+                System.out.println("Something went wrong. \nUnable to perform customer deletion at the moment, inform IT of error");
+            }
+        }
+
+        public  void  confirmUpdate() throws SQLException {
+
+            if (sunActive.updateCustomer()>=1) {
+
+                System.out.println("Customer update success");
+            } else {
+
+                System.out.println("Something went wrong. \nUnable to perform customer update at the moment, inform IT of error");
+            }
+        }
+
+        public void readAllCustomers() {
+
+
+        }
+
     }
 
     class customerLogin{
 
         // class constructor
-        public  customerLogin() {
+        public customerLogin() {
 
         }
 
@@ -157,8 +189,40 @@ public class sunTrustBank {
             switch(firstOption) {
 
                 case 1:
-                    System.out.println("Customer Care Login");
-                    start = false;
+                    System.out.println("\nWelcome Customer Care Attendant");
+                    System.out.println("What action would you like to perform for the Customer");
+                    System.out.println("Press \n 1 To delete a Customer \n 2 TO update a Customer detail \n");
+
+                    customerCare customerCareObj = new customerCare();
+                    int secondOption = scan.nextInt();
+
+                    switch (secondOption) {
+                        case 1:
+                            System.out.println("Enter the id of customer to be deleted");
+                            sunActive.id = String.valueOf(scan.nextLong());
+                            customerCareObj.confirmDelete();
+                            break;
+                        case 2:
+                            System.out.println("Enter correct customer firstname");
+                            sunActive.firstname = scan.nextLine();
+                            System.out.println("Enter correct customer lastname");
+                            sunActive.lastname = scan.nextLine();
+                            System.out.println("Enter correct customer email");
+                            sunActive.email = scan.nextLine();
+                            System.out.println("Enter correct customer address");
+                            sunActive.address = scan.nextLine();
+                            System.out.println("Enter correct customer occupation");
+                            sunActive.occupation = scan.nextLine();
+                            System.out.println("Enter correct customer marital status");
+                            sunActive.marital_status = scan.nextLine();
+                            System.out.println("Enter correct customer phone number");
+                            sunActive.phone_number = scan.nextLine();
+                            customerCareObj.confirmUpdate();
+                            break;
+                        default:
+                            System.out.println("Wrong option try again");
+                            break;
+                    }
                     break;
 
                 case 2:
@@ -174,9 +238,9 @@ public class sunTrustBank {
                     System.out.println("What action would you like to perform");
                     System.out.println("Press \n 1 Deposit \n 2 Withdraw \n 3 Back \n 4 Exit");
 
-                    int secondOption = scan.nextInt();
+                    int thirdOption = scan.nextInt();
 
-                    switch (secondOption) {
+                    switch (thirdOption) {
                         case 1:
                             customerLoginObj.getDeposit();
                             sunActive.extraBalance = sunActive.extraBalance + Long.valueOf(sunActive.balance);
