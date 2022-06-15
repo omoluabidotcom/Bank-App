@@ -38,7 +38,7 @@ public class sunTrustModel {
     private final static String REG_NEW_CUSTOMER = "INSERT INTO fk_customers(firstname, lastname, email, address, occupation," +
             "marital_status, phone_number, password) VALUES(?,?,?,?,?,?,?,?)";
     private final static String DELETE_CUSTOMER = "DELETE FROM fk_customers WHERE id = ?";
-    private final static String UPDATE_CUSTOMER = "UPDATE fk_customers SET firstname=?, lastname=?, email=?, address=?" +
+    private final static String UPDATE_CUSTOMER = "UPDATE fk_customers SET firstname=?, lastname=?, email=?, address=?," +
             "occupation=?, marital_status=?, phone_number=? WHERE id=?";
     private final static String READ_ALL_CUSTOMER = "SELECT id, firstname, lastname, email, address, occupation, marital_status," +
             "phone_number, balance FROM fk_customers";
@@ -153,6 +153,7 @@ public class sunTrustModel {
         preparedstatement.setString(5, occupation);
         preparedstatement.setString(6, marital_status);
         preparedstatement.setString(7, phone_number);
+        preparedstatement.setString(8, id);
 
         int rs = preparedstatement.executeUpdate();
         return rs;

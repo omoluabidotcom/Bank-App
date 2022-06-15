@@ -204,6 +204,7 @@ public class sunTrustBank {
                             break;
                         case 2:
                             System.out.println("Enter correct customer firstname");
+                            scan.nextLine();
                             sunActive.firstname = scan.nextLine();
                             System.out.println("Enter correct customer lastname");
                             sunActive.lastname = scan.nextLine();
@@ -217,6 +218,8 @@ public class sunTrustBank {
                             sunActive.marital_status = scan.nextLine();
                             System.out.println("Enter correct customer phone number");
                             sunActive.phone_number = scan.nextLine();
+                            System.out.println("Enter Customer id");
+                            sunActive.id = scan.nextLine();
                             customerCareObj.confirmUpdate();
                             break;
                         default:
