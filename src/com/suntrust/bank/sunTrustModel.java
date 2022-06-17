@@ -1,6 +1,5 @@
 package com.suntrust.bank;
 
-import java.math.BigDecimal;
 import java.sql.*;
 
 public class sunTrustModel {
@@ -162,12 +161,6 @@ public class sunTrustModel {
     public void readAllCustomer() {
 
     }
-
-    // beta feature
-    public void transfer() {
-
-    }
-
 
 //    "CREATE TABLE IF NOT EXISTS fk_customers(
 //    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
