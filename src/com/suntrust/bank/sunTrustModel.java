@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class sunTrustModel {
 
+    // class constructor
     public  sunTrustModel() {
 
     }
@@ -29,11 +30,12 @@ public class sunTrustModel {
     String nextOfKinNumber;
     String accountNumber;
 
-
+    // database connection fields
     private final String url = "jdbc:mysql://localhost:3306/fk_fintech?useSSL=false";
     private final String user = "root";
     private final  String pword = "";
 
+    // database queries
     private final static String REG_NEW_CUSTOMER = "INSERT INTO fk_customers(firstname, lastname, email, address, occupation," +
             "marital_status, phone_number, password) VALUES(?,?,?,?,?,?,?,?)";
     private final static String DELETE_CUSTOMER = "DELETE FROM fk_customers WHERE id = ?";
@@ -46,7 +48,7 @@ public class sunTrustModel {
     private final static String DEPOSIT = "UPDATE fk_customers SET balance=? WHERE id=?";
     private final static String WITHDRAW = "UPDATE fk_customers SET balance=? WHERE id=?";
 
-
+    // database connection biolerplate code in a method
     public Connection connectDB() {
 
         Connection connection = null;
@@ -59,6 +61,7 @@ public class sunTrustModel {
         return connection;
     }
 
+    // register new customer for bank
     public int customerRegister() throws SQLException {
 
         Connection connection = connectDB();
@@ -77,6 +80,7 @@ public class sunTrustModel {
         return rs;
     }
 
+    // authentication for customer
     public boolean customerLogin() throws SQLException {
 
         boolean returnValue = false;
@@ -105,6 +109,7 @@ public class sunTrustModel {
             return returnValue;
     }
 
+    // perform deposit or customer
     public int deposit() throws SQLException {
 
         Connection connection = connectDB();
@@ -117,6 +122,7 @@ public class sunTrustModel {
         return rs;
     }
 
+    // perform widthdrawal
     public int withdraw() throws  SQLException {
 
         Connection connection = connectDB();
@@ -129,6 +135,7 @@ public class sunTrustModel {
         return rs;
     }
 
+    // perform delete on customer details on database
     public int deleteCustomer() throws SQLException {
 
         Connection connection = connectDB();
@@ -140,6 +147,7 @@ public class sunTrustModel {
         return rs;
     }
 
+    // update customer details on database
     public int updateCustomer() throws SQLException {
 
         Connection connection = connectDB();
@@ -158,7 +166,9 @@ public class sunTrustModel {
         return rs;
     }
 
+    // fetch all customer insensitive data
     public void readAllCustomer() {
+
 
     }
 
