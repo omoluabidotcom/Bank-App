@@ -167,11 +167,33 @@ public class sunTrustModel {
     }
 
     // fetch all customer insensitive data
-    public void readAllCustomer() {
+    public void readAllCustomer() throws SQLException {
 
+        Connection connection = connectDB();
+        Statement statement = connectDB().createStatement();
 
+        ResultSet resultSet = statement.executeQuery(READ_ALL_CUSTOMER);
+
+        while(resultSet.next()) {
+
+            id = resultSet.getString("id");
+            firstname = resultSet.getString("firstname");
+            lastname = resultSet.getString("lastname");
+            email = resultSet.getString("email");
+            address = resultSet.getString("address");
+            occupation = resultSet.getString("occupation");
+            marital_status = resultSet.getString("marital_status");
+            phone_number = resultSet.getString("phone_number");
+            balance = resultSet.getString("balance");
+
+            System.out.println("Id: " + id + " Firstname: " + firstname.toUpperCase() + " Lastname: " + lastname.toUpperCase() + " Email: " + email.toUpperCase()
+            + " Addrees: " + address.toUpperCase() + " Occupation: " + occupation.toUpperCase() + " Marital_status: " + marital_status.toUpperCase() + " Phone number: "
+            + phone_number.toUpperCase() + " Balance: " + balance.toUpperCase());
+
+        }
     }
 
+    //Mysql query used to create the table used for this project
 //    "CREATE TABLE IF NOT EXISTS fk_customers(
 //    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 //    firstname varchar(120) NOT NULL,

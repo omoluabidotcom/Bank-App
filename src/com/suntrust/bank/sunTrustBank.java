@@ -19,6 +19,7 @@ public class sunTrustBank {
     // scanner object
     Scanner scan = new Scanner(System.in);
 
+    // customercare class, allows customer care attendant to login, delete customer and update customer details
     class customerCare{
 
         // class constructor
@@ -26,6 +27,7 @@ public class sunTrustBank {
 
         }
 
+        // method to ascertain deletion
         public  void confirmDelete() throws SQLException {
 
             if (sunActive.deleteCustomer()>=1) {
@@ -33,10 +35,11 @@ public class sunTrustBank {
                 System.out.println("Customer delete success");
             } else {
 
-                System.out.println("Something went wrong. \nUnable to perform customer deletion at the moment, inform IT of error");
+                System.out.println("Something went wrong. \nUnable to perform customer deletion at the moment, inform IT department of error");
             }
         }
 
+        // method to ascertain update
         public  void  confirmUpdate() throws SQLException {
 
             if (sunActive.updateCustomer()>=1) {
@@ -44,17 +47,19 @@ public class sunTrustBank {
                 System.out.println("Customer update success");
             } else {
 
-                System.out.println("Something went wrong. \nUnable to perform customer update at the moment, inform IT of error");
+                System.out.println("Something went wrong. \nUnable to perform customer update at the moment, inform IT department of error");
             }
         }
 
-        public void readAllCustomers() {
+        // method to confirm customer data fetch
+        public void readAllCustomers() throws SQLException {
 
-
+            sunActive.readAllCustomer();
         }
 
     }
 
+    // customer login
     class customerLogin{
 
         // class constructor
@@ -62,8 +67,10 @@ public class sunTrustBank {
 
         }
 
+        // scanner object
         Scanner scan = new Scanner(System.in);
 
+        // methods for collecting customers details
         public  void getDetails() {
 
             System.out.println("Enter your Email");
@@ -73,6 +80,7 @@ public class sunTrustBank {
             sunActive.password = scan.nextLine();
         }
 
+        // method to login customer
         public boolean loginCustomer() throws SQLException {
 
             boolean returnValue = false;
@@ -90,12 +98,14 @@ public class sunTrustBank {
 
         }
 
+        // method to set deposit value to a field
         public void getDeposit() {
 
             System.out.println("Enter amount to be deposit");
             sunActive.extraBalance = scan.nextLong();
         }
 
+        // method to confirm deposit
         public void confirmDeposit() throws SQLException {
 
             if(sunActive.deposit() >= 1) {
@@ -107,12 +117,14 @@ public class sunTrustBank {
             }
         }
 
+        // methods to set withdrawal field
         public void getWithdrawal() {
 
             System.out.println("Enter amount you want to withdraw");
             sunActive.extraBalance = scan.nextLong();
         }
 
+        // method to confirm withdraw
         public void confirmWithdraw() throws SQLException {
 
             if(sunActive.withdraw() >= 1) {
@@ -129,6 +141,7 @@ public class sunTrustBank {
     // customer registration class
     class customerReg{
 
+        // scanner object
         Scanner scan = new Scanner(System.in);
 
         // class constructor
@@ -136,6 +149,7 @@ public class sunTrustBank {
 
         }
 
+        // method to assign values to fields for customer bank registration
         public void getDetails() {
 
             System.out.println("Enter your Firstname");
@@ -164,6 +178,7 @@ public class sunTrustBank {
 
         }
 
+        // method to perform the bank registration
         public boolean regAccount() throws SQLException {
 
             boolean returnValue = false;
@@ -176,7 +191,7 @@ public class sunTrustBank {
     }
 
 
-
+    // method to run bank application
     public void runApp() throws SQLException {
 
         do {
@@ -191,7 +206,8 @@ public class sunTrustBank {
                 case 1:
                     System.out.println("\nWelcome Customer Care Attendant");
                     System.out.println("What action would you like to perform for the Customer");
-                    System.out.println("Press \n 1 To delete a Customer \n 2 TO update a Customer detail \n");
+                    System.out.println("Press \n 1 To delete a Customer \n 2 To update a Customer detail \n 3 To read all " +
+                            "Customers details \n 4 Back \n 5 Exit");
 
                     customerCare customerCareObj = new customerCare();
                     int secondOption = scan.nextInt();
@@ -222,6 +238,16 @@ public class sunTrustBank {
                             sunActive.id = scan.nextLine();
                             customerCareObj.confirmUpdate();
                             break;
+                        case 3:
+                            System.out.println("List of Customers according to id");
+                            customerCareObj.readAllCustomers();
+                            break;
+                        case 4:
+                            // back
+                            break;
+                        case 5:
+                            System.out.println("Thank you for Banking with us");
+                            start = false;
                         default:
                             System.out.println("Wrong option try again");
                             break;
@@ -266,7 +292,7 @@ public class sunTrustBank {
                             break;
 
                         case 3:
-                            // back switch that is why no code is here
+                            // back
                             break;
 
                         case 4:
@@ -304,8 +330,10 @@ public class sunTrustBank {
         }while(start);
     }
 
+    // psvm
     public static void main(String[] args) throws SQLException {
 
+        // application run
         sunTrustBank sunTrustBank = new sunTrustBank();
         sunTrustBank.runApp();
     }
