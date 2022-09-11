@@ -5,7 +5,7 @@ import java.sql.*;
 public class sunTrustModel {
 
     // class constructor
-    public  sunTrustModel() {
+    public sunTrustModel() {
 
     }
 
@@ -33,7 +33,7 @@ public class sunTrustModel {
     // database connection fields
     private final String url = "jdbc:mysql://localhost:3306/fk_fintech?useSSL=false";
     private final String user = "root";
-    private final  String pword = "";
+    private final String pword = "";
 
     // database queries
     private final static String REG_NEW_CUSTOMER = "INSERT INTO fk_customers(firstname, lastname, email, address, occupation," +
@@ -52,7 +52,7 @@ public class sunTrustModel {
     public Connection connectDB() {
 
         Connection connection = null;
-        try{
+        try {
             connection = DriverManager.getConnection(url, user, pword);
 
         } catch (SQLException e) {
@@ -92,21 +92,21 @@ public class sunTrustModel {
 
         ResultSet rs = preparestatement.executeQuery();
 
-            while (rs.next()) {
+        while (rs.next()) {
 
-                id = rs.getString("id");
-                firstname = rs.getString( "firstname");
-                lastname = rs.getString("lastname");
-                address = rs.getString("address");
-                occupation = rs.getString("occupation");
-                marital_status = rs.getString("marital_status");
-                phone_number = rs.getString("phone_number");
-                balance = rs.getString("balance");
+            id = rs.getString("id");
+            firstname = rs.getString("firstname");
+            lastname = rs.getString("lastname");
+            address = rs.getString("address");
+            occupation = rs.getString("occupation");
+            marital_status = rs.getString("marital_status");
+            phone_number = rs.getString("phone_number");
+            balance = rs.getString("balance");
 
-                returnValue = true;
-            }
+            returnValue = true;
+        }
 
-            return returnValue;
+        return returnValue;
     }
 
     // perform deposit or customer
@@ -123,7 +123,7 @@ public class sunTrustModel {
     }
 
     // perform widthdrawal
-    public int withdraw() throws  SQLException {
+    public int withdraw() throws SQLException {
 
         Connection connection = connectDB();
         PreparedStatement preparedstatement = connection.prepareStatement(WITHDRAW);
@@ -174,7 +174,7 @@ public class sunTrustModel {
 
         ResultSet resultSet = statement.executeQuery(READ_ALL_CUSTOMER);
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
 
             id = resultSet.getString("id");
             firstname = resultSet.getString("firstname");
@@ -187,8 +187,8 @@ public class sunTrustModel {
             balance = resultSet.getString("balance");
 
             System.out.println("Id: " + id + " Firstname: " + firstname.toUpperCase() + " Lastname: " + lastname.toUpperCase() + " Email: " + email.toUpperCase()
-            + " Addrees: " + address.toUpperCase() + " Occupation: " + occupation.toUpperCase() + " Marital_status: " + marital_status.toUpperCase() + " Phone number: "
-            + phone_number.toUpperCase() + " Balance: " + balance.toUpperCase());
+                    + " Addrees: " + address.toUpperCase() + " Occupation: " + occupation.toUpperCase() + " Marital_status: " + marital_status.toUpperCase() + " Phone number: "
+                    + phone_number.toUpperCase() + " Balance: " + balance.toUpperCase());
 
         }
     }

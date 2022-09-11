@@ -20,7 +20,7 @@ public class sunTrustBank {
     Scanner scan = new Scanner(System.in);
 
     // customercare class, allows customer care attendant to login, delete customer and update customer details
-    class customerCare{
+    class customerCare {
 
         // class constructor
         public customerCare() {
@@ -28,9 +28,9 @@ public class sunTrustBank {
         }
 
         // method to ascertain deletion
-        public  void confirmDelete() throws SQLException {
+        public void confirmDelete() throws SQLException {
 
-            if (sunActive.deleteCustomer()>=1) {
+            if (sunActive.deleteCustomer() >= 1) {
 
                 System.out.println("Customer delete success");
             } else {
@@ -40,9 +40,9 @@ public class sunTrustBank {
         }
 
         // method to ascertain update
-        public  void  confirmUpdate() throws SQLException {
+        public void confirmUpdate() throws SQLException {
 
-            if (sunActive.updateCustomer()>=1) {
+            if (sunActive.updateCustomer() >= 1) {
 
                 System.out.println("Customer update success");
             } else {
@@ -60,7 +60,7 @@ public class sunTrustBank {
     }
 
     // customer login
-    class customerLogin{
+    class customerLogin {
 
         // class constructor
         public customerLogin() {
@@ -71,7 +71,7 @@ public class sunTrustBank {
         Scanner scan = new Scanner(System.in);
 
         // methods for collecting customers details
-        public  void getDetails() {
+        public void getDetails() {
 
             System.out.println("Enter your Email");
             sunActive.email = scan.nextLine();
@@ -84,11 +84,11 @@ public class sunTrustBank {
         public boolean loginCustomer() throws SQLException {
 
             boolean returnValue = false;
-            if(sunActive.customerLogin()) {
+            if (sunActive.customerLogin()) {
 
-                System.out.println("Welcome to your dashboard Mr "+sunActive.firstname+" "+sunActive.lastname);
-                System.out.println("Address: "+sunActive.address);
-                System.out.println("Occupation: "+sunActive.occupation);
+                System.out.println("Welcome to your dashboard Mr " + sunActive.firstname + " " + sunActive.lastname);
+                System.out.println("Address: " + sunActive.address);
+                System.out.println("Occupation: " + sunActive.occupation);
                 System.out.println("Phone Number: " + sunActive.phone_number);
                 System.out.println("Balance: " + sunActive.balance);
                 // System.out.println(sunActive.id);
@@ -108,7 +108,7 @@ public class sunTrustBank {
         // method to confirm deposit
         public void confirmDeposit() throws SQLException {
 
-            if(sunActive.deposit() >= 1) {
+            if (sunActive.deposit() >= 1) {
 
                 System.out.println("Money deposited to your Account \n Your Balance is " + sunActive.balance);
             } else {
@@ -127,7 +127,7 @@ public class sunTrustBank {
         // method to confirm withdraw
         public void confirmWithdraw() throws SQLException {
 
-            if(sunActive.withdraw() >= 1) {
+            if (sunActive.withdraw() >= 1) {
 
                 System.out.println("Withdrawal successful");
             } else {
@@ -139,7 +139,7 @@ public class sunTrustBank {
     }
 
     // customer registration class
-    class customerReg{
+    class customerReg {
 
         // scanner object
         Scanner scan = new Scanner(System.in);
@@ -182,7 +182,7 @@ public class sunTrustBank {
         public boolean regAccount() throws SQLException {
 
             boolean returnValue = false;
-            if(sunActive.customerRegister() >= 1) {
+            if (sunActive.customerRegister() >= 1) {
                 returnValue = true;
             }
 
@@ -201,7 +201,7 @@ public class sunTrustBank {
 
             int firstOption = scan.nextInt();
 
-            switch(firstOption) {
+            switch (firstOption) {
 
                 case 1:
                     System.out.println("\nWelcome Customer Care Attendant");
@@ -309,7 +309,7 @@ public class sunTrustBank {
                 case 3:
                     customerReg customerRegObj = new customerReg();
                     customerRegObj.getDetails();
-                    if(customerRegObj.regAccount()) {
+                    if (customerRegObj.regAccount()) {
 
                         System.out.println("You have successfully opened an account with SunTrust Bank. \n Welcome to the fold");
                         System.exit(0);
@@ -327,7 +327,7 @@ public class sunTrustBank {
                     break;
             }
 
-        }while(start);
+        } while (start);
     }
 
     // psvm
